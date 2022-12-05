@@ -27,7 +27,10 @@ move 1 from 1 to 2";
     [Test]
     public void TestPart2()
     {
-        var codeDay5 = new CodeDay5();
+        var codeDay5 = new CodeDay5
+        {
+            IsCrateMover9001 = false
+        };
         codeDay5.IsCrateMover9001 = true;
         var result = codeDay5.Solve(testInput);
         Assert.AreEqual("MCD", result);
@@ -36,8 +39,10 @@ move 1 from 1 to 2";
     [Test]
     public void TestFullPart2()
     {
-        var codeDay5 = new CodeDay5();
-        codeDay5.IsCrateMover9001 = true;
+        var codeDay5 = new CodeDay5
+        {
+            IsCrateMover9001 = true
+        };
         var result = codeDay5.Solve(File.ReadAllText("./Input5.txt"));
         Assert.AreEqual("QNDWLMGNS", result);
     }
