@@ -11,7 +11,9 @@ public class CodeDay5
         var inputParameters = input.Split(Environment.NewLine + Environment.NewLine);
         var boxStack = ParseBoxStackFromInput(inputParameters[0]);
         ProcessInputOnBoxStack(inputParameters[1], boxStack);
-        return string.Join(string.Empty, boxStack.Select(t => t.Value.First()).ToArray());
+        var result = string.Join(string.Empty, boxStack.Select(t => t.Value.First()).ToArray());
+        Console.WriteLine("Result: " + result);
+        return result;
     }
     
     private void ProcessInputOnBoxStack(string inputParameter, Dictionary<int, List<string>> boxStack)

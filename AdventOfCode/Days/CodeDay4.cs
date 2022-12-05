@@ -5,23 +5,21 @@ namespace AdventOfCode;
 public class CodeDay4
 {
 
-    public void Solve()
+    public void Solve(string input)
     {
-        var input = File.ReadAllText("./Input4.txt");
         var parsedElves = input.Split(Environment.NewLine)
             .Select(line => line.Split(","))
             .Select(GetElfRange)
-            .Select(e => e.ToArray());
+            .Select(e => e.ToArray()).ToArray();
         
         var completelyOverlapping = parsedElves.Count(AreRangesCompletelyOverlapping);
         var overlappingRanges = parsedElves.Count(AreRangesOverlapping);
-
-
         
         Console.WriteLine("Overlapping ranges: " + overlappingRanges);
+        Console.WriteLine("Completely overlapping ranges: " + completelyOverlapping);
     }
 
-    private IEnumerable<Tuple<int, int>> GetElfRange(IEnumerable<string> line)
+    private static IEnumerable<Tuple<int, int>> GetElfRange(IEnumerable<string> line)
     {
         var elfRange = new List<Tuple<int, int>>();
         foreach (var elfLine in line)
@@ -33,7 +31,7 @@ public class CodeDay4
         return elfRange;
     }
     
-    private bool AreRangesOverlapping(IList<Tuple<int, int>> elves)
+    private static bool AreRangesOverlapping(IList<Tuple<int, int>> elves)
     {
         if (elves.Count > 2)
         {
@@ -47,7 +45,7 @@ public class CodeDay4
     }
     
 
-    private bool AreRangesCompletelyOverlapping(IList<Tuple<int, int>> elves)
+    private static bool AreRangesCompletelyOverlapping(IList<Tuple<int, int>> elves)
     {
         if (elves.Count > 2)
         {

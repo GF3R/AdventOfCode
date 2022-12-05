@@ -43,7 +43,7 @@ move 1 from 1 to 2";
         {
             IsCrateMover9001 = true
         };
-        var result = codeDay5.Solve(File.ReadAllText("./Input5.txt"));
+        var result = codeDay5.Solve(File.ReadAllText("./Inputs/Input5.txt"));
         Assert.AreEqual("QNDWLMGNS", result);
     }
     

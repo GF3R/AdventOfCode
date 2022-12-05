@@ -9,14 +9,8 @@ public class CodeDay2
     private const string OUTCOMEWDRAW = "Y";
     private const string OUTCOMEWIN = "Z";
 
-    public void TestClass()
+    public void Solve(string input)
     {
-        
-    }
-
-    public void Solve()
-    {
-        var input = File.ReadAllText("./Input2.txt");
         var parsedList = input.Split('\n').Select(s => s.Split(" "));
         var score = 0;
         

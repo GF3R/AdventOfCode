@@ -5,9 +5,8 @@ namespace AdventOfCode;
 public class CodeDay3
 {
 
-    public void Solve()
+    public void Solve(string input)
     {
-        var input = File.ReadAllText("./Input3.txt");
         var lines = input.Split(Environment.NewLine);
         var sum = SolvePart1(lines.Select(x => x.ToCharArray()));
         Console.WriteLine($"Part1: {sum}");
