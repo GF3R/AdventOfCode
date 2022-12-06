@@ -20,7 +20,7 @@ public class CodeDay6
         throw new ArgumentException("No solution found");
     }
 
-    private static bool AllfourLettersAreUnique(IList<char> fourLetters)
+    private static bool AllfourLettersAreUnique(ICollection<char> fourLetters)
     {
         return fourLetters.Distinct().Count() == fourLetters.Count;
     }
