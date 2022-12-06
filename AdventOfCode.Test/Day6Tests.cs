@@ -17,6 +17,7 @@ public class Day6Tests
         var result = day6Solver.Solve(input);
         Assert.AreEqual(ouptut, result);
     }
+    
     [TestCase("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
     [TestCase("bvwbjplbgvbhsrlpgdmjqwftvncz", 23)]
     [TestCase("nppdvjthqldpwncqszvftbrmjlhg", 23)]
