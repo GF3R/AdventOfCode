@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using AdventOfCode.Days;
 using NUnit.Framework;
 
 namespace AdventOfCode.Test;
@@ -29,9 +30,9 @@ move 1 from 1 to 2";
     {
         var codeDay5 = new CodeDay5
         {
-            IsCrateMover9001 = false
+            IsCrateMover9001 = true
         };
-        codeDay5.IsCrateMover9001 = true;
+        
         var result = codeDay5.Solve(testInput);
         Assert.AreEqual("MCD", result);
     }

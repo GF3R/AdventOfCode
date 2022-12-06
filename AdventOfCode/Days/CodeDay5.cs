@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AdventOfCode;
+namespace AdventOfCode.Days;
 
 public class CodeDay5
 {
     public bool IsCrateMover9001 = false;
 
-    public object Solve(string input)
+    public string Solve(string input)
     {
         var inputParameters = input.Split(Environment.NewLine + Environment.NewLine);
         var boxStack = ParseBoxStackFromInput(inputParameters[0]);
@@ -42,13 +42,14 @@ public class CodeDay5
 
     private static Dictionary<int, List<string>> ParseBoxStackFromInput(string boxStackInput)
     {
-        var regex = new Regex(@"[A-Z]|\s{4}");
-
+        var lettersAndSpacesRegex = new Regex(@"[A-Z]|\s{4}");
+        var findAllNumbersRegex = new Regex(@"\d+");
+        
         var craneInput = boxStackInput.Split(Environment.NewLine);
-        var boxes = craneInput[^1].Split("   ").Select(t => int.Parse(t.Trim())).ToDictionary(t => t, t => new List<string>());
+        var boxes = findAllNumbersRegex.Matches(craneInput[^1]).ToDictionary(t => int.Parse(t.Value), t => new List<string>());
         foreach (var craneLine in craneInput.Take(craneInput.Length - 1))
         {
-            var craneLineParts = regex.Matches(craneLine).Select(m => m.Value).ToArray();
+            var craneLineParts = lettersAndSpacesRegex.Matches(craneLine).Select(m => m.Value).ToArray();
             for (var i = 0; i < craneLineParts.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(craneLineParts[i]))
