@@ -3,6 +3,7 @@
 public class CodeDay6
 {
     public int PacketSize = 4;
+    
     public int Solve(string input)
     {
         var inputPacket = input.ToCharArray().ToList();
