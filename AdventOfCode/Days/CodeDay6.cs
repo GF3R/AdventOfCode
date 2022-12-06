@@ -11,7 +11,7 @@ public class CodeDay6
         for (var i = 0; i < inputPacket.Count; i++)
         {
             var fourLetters = inputPacket.GetRange(i, PacketSize);
-            if (AllfourLettersAreUnique(fourLetters))
+            if (AllFourLettersAreUnique(fourLetters))
             {
                 return i + PacketSize;
             }
@@ -20,7 +20,7 @@ public class CodeDay6
         throw new ArgumentException("No solution found");
     }
 
-    private static bool AllfourLettersAreUnique(ICollection<char> fourLetters)
+    private static bool AllFourLettersAreUnique(ICollection<char> fourLetters)
     {
         return fourLetters.Distinct().Count() == fourLetters.Count;
     }
