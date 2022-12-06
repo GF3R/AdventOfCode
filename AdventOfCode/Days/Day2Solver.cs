@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Days;
 
-public class CodeDay2
+public class Day2Solver
 {
     private const string ROCK = "A";
     private const string PAPER = "B";

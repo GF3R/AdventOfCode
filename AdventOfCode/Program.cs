@@ -1,11 +1,11 @@
-﻿using AdventOfCode;
-using AdventOfCode.Days;
+﻿using AdventOfCode.Days;
 
-// var aoCSolver = new CodeDay1();
-// var aoCSolver = new CodeDay3();
-// var aoCSolver = new CodeDay4();
-// var aoCSolver = new CodeDay5();
-var aoCSolver = new CodeDay6
+// var aoCSolver = new Day1Solver();
+// var aoCSolver = new Day2Solver();
+// var aoCSolver = new Day3Solver();
+// var aoCSolver = new Day4Solver();
+// var aoCSolver = new Day5Solver();
+var aoCSolver = new Day6Solver
 {
     PacketSize = 14
 };

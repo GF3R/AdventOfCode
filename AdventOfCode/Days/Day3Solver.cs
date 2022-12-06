@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Days;
 
-public class CodeDay3
+public class Day3Solver
 {
 
     public void Solve(string input)

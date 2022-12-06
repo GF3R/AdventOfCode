@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Days;
 
-public class CodeDay6
+public class Day6Solver
 {
     public int PacketSize = 4;
     

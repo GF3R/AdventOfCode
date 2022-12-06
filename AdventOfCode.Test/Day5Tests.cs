@@ -6,7 +6,7 @@ namespace AdventOfCode.Test;
 
 public class Day5Tests
 {
-    private string testInput = @"
+    private readonly string testInput = @"
     [D]    
 [N] [C]    
 [Z] [M] [P]
@@ -20,7 +20,7 @@ move 1 from 1 to 2";
     [Test]
     public void TestPart1()
     {
-        var codeDay5 = new CodeDay5();
+        var codeDay5 = new Day5Solver();
         var result = codeDay5.Solve(testInput);
         Assert.AreEqual("CMZ", result);
     }
@@ -28,26 +28,26 @@ move 1 from 1 to 2";
     [Test]
     public void TestPart2()
     {
-        var codeDay5 = new CodeDay5
+        var codeDay5 = new Day5Solver
         {
             IsCrateMover9001 = true
         };
-        
+
         var result = codeDay5.Solve(testInput);
         Assert.AreEqual("MCD", result);
     }
-    
+
     [Test]
     public void TestFullPart2()
     {
-        var codeDay5 = new CodeDay5
+        var codeDay5 = new Day5Solver
         {
             IsCrateMover9001 = true
         };
         var result = codeDay5.Solve(File.ReadAllText("./Inputs/Input5.txt"));
         Assert.AreEqual("QNDWLMGNS", result);
     }
-    
+
     [TestCase("[Z] [M] [P]", "ZMP")]
     [TestCase("    [D]    ", "    D    ")]
     [TestCase("[N] [C]    ", "NC    ")]

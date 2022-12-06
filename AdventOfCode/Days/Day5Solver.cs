@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Days;
 
-public class CodeDay5
+public class Day5Solver
 {
     public bool IsCrateMover9001 = false;
 

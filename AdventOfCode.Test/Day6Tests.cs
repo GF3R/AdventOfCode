@@ -13,7 +13,7 @@ public class Day6Tests
     [TestCase("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11)]
     public void Day6Part1Tests(string input, int ouptut)
     {
-        var day6Solver = new CodeDay6();
+        var day6Solver = new Day6Solver();
         var result = day6Solver.Solve(input);
         Assert.AreEqual(ouptut, result);
     }
@@ -25,7 +25,7 @@ public class Day6Tests
     [TestCase("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
     public void Day6Part2Tests(string input, int ouptut)
     {
-        var day6Solver = new CodeDay6
+        var day6Solver = new Day6Solver
         {
             PacketSize = 14
         };
