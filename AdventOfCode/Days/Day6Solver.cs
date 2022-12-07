@@ -10,8 +10,8 @@ public class Day6Solver
 
         for (var i = 0; i < inputPacket.Count; i++)
         {
-            var fourLetters = inputPacket.GetRange(i, PacketSize);
-            if (AllFourLettersAreUnique(fourLetters))
+            var letters = inputPacket.GetRange(i, PacketSize);
+            if (AllLettersAreUnique(letters))
             {
                 return i + PacketSize;
             }
@@ -20,7 +20,7 @@ public class Day6Solver
         throw new ArgumentException("No solution found");
     }
 
-    private static bool AllFourLettersAreUnique(ICollection<char> fourLetters)
+    private static bool AllLettersAreUnique(ICollection<char> fourLetters)
     {
         return fourLetters.Distinct().Count() == fourLetters.Count;
     }
