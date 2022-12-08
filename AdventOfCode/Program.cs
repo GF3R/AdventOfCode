@@ -10,6 +10,7 @@
 //     PacketSize = 14
 // };
 
-var aoCSolver = new Day7Solver();
-var result = aoCSolver.Solve(File.ReadAllText("./Inputs/Input7.txt"), part1: false);
+// var aoCSolver = new Day7Solver();
+var aoCSolver = new Day8Solver();
+var result = aoCSolver.SolvePart2(File.ReadAllText("./Inputs/Input8.txt"));
 Console.WriteLine("Result: " + result);
