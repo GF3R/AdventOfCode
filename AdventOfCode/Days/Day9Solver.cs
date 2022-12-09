@@ -2,15 +2,15 @@
 
 public class Day9Solver
 {
-    public int Solve(string? input, int numberOfKnots)
+    public int Solve(string input, int numberOfKnots)
     {
         var visited = new HashSet<(int, int)>();
         var knots = Enumerable.Range(0, numberOfKnots).Select(t => new SnakePoint { X = 0, Y = 0 }).ToList();
-        foreach (var step in input.Split(Environment.NewLine).Where(t => !string.IsNullOrWhiteSpace(t)))
+        foreach (var instruction in input.Split(Environment.NewLine).Where(t => !string.IsNullOrWhiteSpace(t)))
         {
-            for (var steps = 0; steps < int.Parse(step[2..]); ++steps)
+            for (var steps = 0; steps < int.Parse(instruction[2..]); ++steps)
             {
-                MoveHead(knots[0], step[0]);
+                MoveHead(knots[0], instruction[0]);
                 for (var knotPlace = 0; knotPlace < knots.Count - 1; knotPlace++)
                 {
                     MoveTail(knots[knotPlace], knots[knotPlace + 1]);
