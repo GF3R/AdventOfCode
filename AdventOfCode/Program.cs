@@ -11,6 +11,7 @@
 // };
 
 // var aoCSolver = new Day7Solver();
-var aoCSolver = new Day8Solver();
-var result = aoCSolver.SolvePart2(File.ReadAllText("./Inputs/Input8.txt"));
+// var aoCSolver = new Day8Solver();
+var aoCSolver = new Day9Solver();
+var result = aoCSolver.Solve(File.ReadAllText("./Inputs/Input9.txt"), 10);
 Console.WriteLine("Result: " + result);
