@@ -22,7 +22,6 @@ public class Day9Solver
         return visited.Count;
     }
 
-
     private void MoveHead(SnakePoint head, char direction)
     {
         switch (direction)
