@@ -1,33 +1,30 @@
-﻿using System.Text;
-
-namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Days;
 
 public class Day14Solver : BaseSolver
 {
-    private readonly string possibleInput = @"498,4 -> 498,6 -> 496,6
-503,4 -> 502,4 -> 502,9 -> 494,9";
+    Dictionary<(int, int), CavePoint> _cavePoints = new Dictionary<(int, int), CavePoint>();
 
-    Dictionary<(int, int), CavePoint> cavePoints = new Dictionary<(int, int), CavePoint>();
-
-    int maxX;
-    int maxY;
-    int minX = int.MaxValue;
-    int minY = int.MaxValue;
+    int _maxX;
+    int _maxY;
+    int _minX = int.MaxValue;
+    int _minY = int.MaxValue;
 
     public override object SolvePart1(string input)
     {
+        _cavePoints.Clear();
         CreateRocks(input);
         CreateSand();
         PrintPoints();
-        return cavePoints.Values.Count(x => x.Type == Material.Sand);
+        return _cavePoints.Values.Count(x => x.Type == Material.Sand);
     }
 
     public override object SolvePart2(string input)
     {
-        CreateRocks(input);
+        _cavePoints.Clear();
+        CreateRocks(input, true);
         CreateSand();
         PrintPoints();
-        return cavePoints.Values.Count(x => x.Type == Material.Sand);
+        return _cavePoints.Values.Count(x => x.Type == Material.Sand);
     }
 
     private void CreateSand()
@@ -88,8 +85,14 @@ public class Day14Solver : BaseSolver
             if (currentPoint.Type == Material.FallingSand)
             {
                 currentPoint.Type = Material.Sand;
-                cavePoints[currentPoint.GetPoint()] = currentPoint;
-                cavePoints = cavePoints.Where(t => t.Value.Type != Material.FallingSand).ToDictionary(t => t.Key, t => t.Value);
+          
+
+                _cavePoints[currentPoint.GetPoint()] = currentPoint;
+                _cavePoints = _cavePoints.Where(t => t.Value.Type != Material.FallingSand).ToDictionary(t => t.Key, t => t.Value);
+                if (currentPoint is { X: 500, Y: 0 })
+                {
+                    break;
+                }
                 currentPoint = new CavePoint
                 {
                     Type = Material.FallingSand,
@@ -99,6 +102,8 @@ public class Day14Solver : BaseSolver
                 triedToMoveLeft = 0;
                 triedToMoveRight = 0;
             }
+
+            PrintPoints();
         }
     }
 
@@ -106,15 +111,15 @@ public class Day14Solver : BaseSolver
     {
         CavePoint currentPoint = pointBelow;
         currentPoint.Type = Material.FallingSand;
-        cavePoints.Add(currentPoint.GetPoint(), currentPoint);
+        _cavePoints.Add(currentPoint.GetPoint(), currentPoint);
         return currentPoint;
     }
 
     private CavePoint GetCavePoint(int x, int y)
     {
-        if (cavePoints.ContainsKey((x, y)))
+        if (_cavePoints.ContainsKey((x, y)))
         {
-            return cavePoints[(x, y)];
+            return _cavePoints[(x, y)];
         }
 
         return new CavePoint
@@ -125,7 +130,7 @@ public class Day14Solver : BaseSolver
         };
     }
 
-    private void CreateRocks(string input)
+    private void CreateRocks(string input, bool includeFloor = false)
     {
         foreach (var line in input.Split(Environment.NewLine))
         {
@@ -136,59 +141,70 @@ public class Day14Solver : BaseSolver
                 var coords = part.Split(",");
                 var x = int.Parse(coords[0]);
                 var y = int.Parse(coords[1]);
-                maxX = Math.Max(maxX, x);
-                maxY = Math.Max(maxY, y);
-                minX = Math.Min(minX, x);
-                minY = Math.Min(minY, y);
+                _maxX = Math.Max(_maxX, x);
+                _maxY = Math.Max(_maxY, y);
+                _minX = Math.Min(_minX, x);
+                _minY = Math.Min(_minY, y);
                 var newCavePoint = new CavePoint
                 {
                     X = x,
                     Y = y,
                     Type = Material.Rock
                 };
-                if (!cavePoints.ContainsKey(newCavePoint.GetPoint()))
+                if (!_cavePoints.ContainsKey(newCavePoint.GetPoint()))
                 {
-                    cavePoints.Add(newCavePoint.GetPoint(), newCavePoint);
+                    _cavePoints.Add(newCavePoint.GetPoint(), newCavePoint);
                 }
 
                 lastCavePoint = lastCavePoint == null ? newCavePoint : CreateCavepointsFromLastToNext(newCavePoint, lastCavePoint);
             }
         }
+
+        if (!includeFloor) return;
+        
+        for (var i = _minX * -3; i < _maxX * 3; i++)
+        {
+            var point = new CavePoint
+            {
+                Type = Material.Rock,
+                X = i,
+                Y = _maxY + 2
+            };
+            _cavePoints.Add(point.GetPoint(), point);
+        }
     }
 
     private void PrintPoints()
     {
-        var sb = new StringBuilder();
-        for (var y = minY - 1; y <= maxY + 1; y++)
+        var output = string.Empty;
+        for (var y = _minY - 50; y <= _maxY + 10; y++)
         {
-            for (var x = minX - 1; x <= maxX + 1; x++)
+            for (var x = _minX - 50; x <= _maxX + 50; x++)
             {
                 var point = GetCavePoint(x, y);
 
                 switch (point.Type)
                 {
                     case Material.Rock:
-                        sb.Append('#');
+                        output +='#';
                         break;
                     case Material.FallingSand:
-                        sb.Append('~');
+                        output+='~';
                         break;
                     case Material.Air:
-                        sb.Append('.');
+                        output+='.';
                         break;
                     case Material.Sand:
-                        sb.Append('o');
+                        output+='o';
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
 
-            sb.Append(Environment.NewLine);
+            output+=Environment.NewLine;
         }
-
-        Console.Clear();
-        Console.WriteLine(sb.ToString());
+        Console.WriteLine("\r" + output);
     }
 
     private CavePoint CreateCavepointsFromLastToNext(CavePoint newCavePoint, CavePoint lastCavePoint)
@@ -211,9 +227,9 @@ public class Day14Solver : BaseSolver
             xDiff = newCavePoint.X - lastCavePoint.X;
             if (xDiff != 0)
             {
-                if (!cavePoints.ContainsKey(lastCavePoint.GetPoint()))
+                if (!_cavePoints.ContainsKey(lastCavePoint.GetPoint()))
                 {
-                    cavePoints.Add((lastCavePoint.X, lastCavePoint.Y), lastCavePoint);
+                    _cavePoints.Add((lastCavePoint.X, lastCavePoint.Y), lastCavePoint);
                 }
             }
         }
@@ -229,19 +245,14 @@ public class Day14Solver : BaseSolver
             yDiff = newCavePoint.Y - lastCavePoint.Y;
             if (yDiff != 0)
             {
-                if (!cavePoints.ContainsKey(lastCavePoint.GetPoint()))
+                if (!_cavePoints.ContainsKey(lastCavePoint.GetPoint()))
                 {
-                    cavePoints.Add((lastCavePoint.X, lastCavePoint.Y), lastCavePoint);
+                    _cavePoints.Add((lastCavePoint.X, lastCavePoint.Y), lastCavePoint);
                 }
             }
         }
 
         return lastCavePoint;
-    }
-
-    public override object SolvePart2(string input)
-    {
-        return null;
     }
 }
 
