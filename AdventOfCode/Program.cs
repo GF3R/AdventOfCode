@@ -15,6 +15,11 @@
 // var aoCSolver = new Day9Solver();
 // var aoCSolver = new Day10Solver();
 // var aoCSolver = new Day11Solver();
-var aoCSolver = new Day12Solver();
-var result = aoCSolver.Solve(File.ReadAllText("./Inputs/Input12.txt"), false);
-Console.WriteLine("Result: " + result);
+// var aoCSolver = new Day12Solver();
+// var aoCSolver = new Day13Solver();
+var aoCSolver = new Day14Solver();
+var (result1, result2) = aoCSolver.Solve(File.ReadAllText("./Inputs/Input14.txt"));
+Console.WriteLine("Result: " + result1);
+Console.WriteLine("Result2: " + result2);
+
+Console.ReadLine();

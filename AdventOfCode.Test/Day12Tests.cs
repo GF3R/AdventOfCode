@@ -17,7 +17,7 @@ abdefghi";
     [TestCase(TestInput, 29, false)]
     [TestCase(null, 500, false)]
     [TestCase(null, 504, true)]
-    public void Day11Part1Tests(string? input, int ouptut, bool fromStart = true)
+    public void Day12Part1Tests(string? input, int ouptut, bool fromStart = true)
     {
         var day12Solver = new Day12Solver();
         input ??= FullInput;

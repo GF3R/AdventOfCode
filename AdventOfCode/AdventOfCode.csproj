@@ -46,6 +46,20 @@
       </Content>
       <None Remove="Input.txt" />
       <None Remove="Input3.txt" />
+      <Content Update="Inputs\Input13.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Inputs\Input14.txt" />
+      <Content Include="Inputs\Input14.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Inputs\Input13.txt" />
+      <Content Include="Inputs\Input13.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 
