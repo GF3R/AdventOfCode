@@ -1,6 +1,6 @@
-﻿using System.Text.Json;
+﻿namespace AdventOfCode.Twenty22.Days;
 
-namespace AdventOfCode.Days;
+using System.Text.Json;
 
 public class Day13Solver
 {
@@ -37,14 +37,14 @@ public class Day13Solver
         var pairs = input.Split(Environment.NewLine + Environment.NewLine).Select(x =>
         {
             var pair = x.Split(Environment.NewLine);
-            return (FromJsonString(pair[0]) as object[], FromJsonString(pair[1]) as object[]);
+            return (this.FromJsonString(pair[0]) as object[], this.FromJsonString(pair[1]) as object[]);
         }).ToArray();
 
         var sumOfIndices = 0;
         for (int i = 0; i < pairs.Length; i++)
         {
-            var result = ComparePare(pairs[i].Item1, pairs[i].Item2);
-            if (ComparePare(pairs[i].Item1, pairs[i].Item2) == RightOrder)
+            var result = this.ComparePare(pairs[i].Item1, pairs[i].Item2);
+            if (this.ComparePare(pairs[i].Item1, pairs[i].Item2) == RightOrder)
             {
                 sumOfIndices += i + 1;
             }
@@ -59,15 +59,15 @@ public class Day13Solver
         foreach (var item in input.Split(Environment.NewLine + Environment.NewLine))
         {
             var pair = item.Split(Environment.NewLine);
-            items.Add(FromJsonString(pair[0]));
-            items.Add(FromJsonString(pair[1]));
+            items.Add(this.FromJsonString(pair[0]));
+            items.Add(this.FromJsonString(pair[1]));
         }
 
         var divider1 = new object[] { new object[] { 2 } };
         var divider2 = new object[] { new object[] { 6 } };
         items.Add(divider1);
         items.Add(divider2);
-        items.Sort(ComparePare);
+        items.Sort(this.ComparePare);
         var index1 = items.FindIndex(p => p == divider1) + 1;
         var index2 = items.FindIndex(p => p == divider2) + 1;
         return index1 * index2;
@@ -91,7 +91,7 @@ public class Day13Solver
 
         for (int i = 0; i < smallestArrayLength; i++)
         {
-            var result = ComparePare(aArray[i], bArray[i]);
+            var result = this.ComparePare(aArray[i], bArray[i]);
             if (result != TiedOrder)
             {
                 return result;

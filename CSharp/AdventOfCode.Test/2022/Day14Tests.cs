@@ -3,6 +3,8 @@ using NUnit.Framework;
 
 namespace AdventOfCode.Test;
 
+using Twenty22.Days;
+
 public class Day14Tests : BaseDayTest<Day14Solver>
 {
     private const string TestInput = @"498,4 -> 498,6 -> 496,6

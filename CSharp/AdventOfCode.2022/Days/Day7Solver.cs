@@ -1,6 +1,6 @@
-﻿using System.Text;
+﻿namespace AdventOfCode.Twenty22.Days;
 
-namespace AdventOfCode.Days;
+using System.Text;
 
 public class Day7Solver
 {
@@ -23,7 +23,7 @@ public class Day7Solver
         {
             if (line.StartsWith("$"))
             {
-                HandleCommand(line);
+                this.HandleCommand(line);
             }
             else
             {
@@ -55,12 +55,12 @@ public class Day7Solver
 
         if (part1)
         {
-            GetAllFolders(Root, folders);
+            this.GetAllFolders(Root, folders);
             return folders.Where(f => f.Size <= 100000).Sum(s => s.Size);
         }
 
         var remainingSpace = SystemSize - Root.Size;
-        GetAllFolders(Root, folders);
+        this.GetAllFolders(Root, folders);
         var orderedFolders = folders.OrderBy(t => t.Size);
         foreach (var folder in orderedFolders)
         {
@@ -80,7 +80,7 @@ public class Day7Solver
         {
             if (child is FileSystemFolder childFolder)
             {
-                GetAllFolders(childFolder, folders);
+                this.GetAllFolders(childFolder, folders);
             }
         }
     }
@@ -91,7 +91,7 @@ public class Day7Solver
         switch (commandParts[1])
         {
             case "cd":
-                HandleCd(commandParts[2]);
+                this.HandleCd(commandParts[2]);
                 break;
             default:
                 return;
@@ -143,7 +143,7 @@ class FileSystemElement
     
     public virtual string ToLog(string prefix = "")
     {
-        return $"{prefix}- {Name} (file, size={Size})\n";
+        return $"{prefix}- {this.Name} (file, size={this.Size})\n";
     }
 }
 
@@ -164,9 +164,9 @@ class FileSystemFolder : FileSystemElement
     public override string ToLog(string prefix = "")
     {
         var stringBuilder = new StringBuilder();
-        stringBuilder.Append($"{prefix}- {Name} (dir, size={Size}))\n");
+        stringBuilder.Append($"{prefix}- {this.Name} (dir, size={this.Size}))\n");
         
-        foreach (var child in Children)
+        foreach (var child in this.Children)
         {
             stringBuilder.Append(child.ToLog(prefix + " "));
         }

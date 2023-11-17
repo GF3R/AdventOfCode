@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Twenty22.Days;
 
 public class Day9Solver
 {
@@ -10,10 +10,10 @@ public class Day9Solver
         {
             for (var steps = 0; steps < int.Parse(instruction[2..]); ++steps)
             {
-                MoveHead(knots[0], instruction[0]);
+                this.MoveHead(knots[0], instruction[0]);
                 for (var knotPlace = 0; knotPlace < knots.Count - 1; knotPlace++)
                 {
-                    MoveTail(knots[knotPlace], knots[knotPlace + 1]);
+                    this.MoveTail(knots[knotPlace], knots[knotPlace + 1]);
                 }
                 TryAdd(visited, (knots[^1].X, knots[^1].Y));
             }

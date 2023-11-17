@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Core;
 
 public abstract class BaseSolver : ISolver
 {
@@ -8,6 +8,6 @@ public abstract class BaseSolver : ISolver
 
     public (object, object) Solve(string input)
     {
-        return (SolvePart1(input), SolvePart2(input));
+        return (this.SolvePart1(input), this.SolvePart2(input));
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿namespace AdventOfCode.Twenty22.Days;
 
-namespace AdventOfCode.Days;
+using System.Text.RegularExpressions;
 
 public class Day5Solver
 {
@@ -10,7 +10,7 @@ public class Day5Solver
     {
         var inputParameters = input.Split(Environment.NewLine + Environment.NewLine);
         var boxStack = ParseBoxStackFromInput(inputParameters[0]);
-        ProcessInputOnBoxStack(inputParameters[1], boxStack);
+        this.ProcessInputOnBoxStack(inputParameters[1], boxStack);
         var result = string.Join(string.Empty, boxStack.Select(t => t.Value.First()).ToArray());
         Console.WriteLine("Result: " + result);
         return result;

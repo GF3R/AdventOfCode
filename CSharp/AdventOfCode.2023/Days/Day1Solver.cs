@@ -1,6 +1,7 @@
-﻿namespace AdventOfCode._2023.Days
+﻿namespace AdventOfCode.Twenty23.Days
 {
     using AdventOfCode.Days;
+    using Core;
 
     public class Day1Solver : BaseSolver
     {

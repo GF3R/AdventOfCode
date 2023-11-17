@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Twenty22.Days;
 
 public class Day12Solver
 {
     public int Solve(string input, bool fromStart = true)
     {
-        var points = BuildGraph(input);
+        var points = this.BuildGraph(input);
         var q = new Queue<(int, int)>();
         var goal = points.Single(p => p.Value.IsEnd).Value;
         q.Enqueue((goal.X, goal.Y));

@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Twenty22.Days;
+
+using AdventOfCode.Days;
 
 public class Day11Solver
 {
@@ -29,7 +31,7 @@ public class MonkeyOrchestrator
 {
     public MonkeyOrchestrator()
     {
-        Monkeys = new Dictionary<int, Monkey>();
+        this.Monkeys = new Dictionary<int, Monkey>();
     }
 
     public int ModuloShift { get; set; }
@@ -38,13 +40,13 @@ public class MonkeyOrchestrator
 
     public long GetMagicNumber()
     {
-        var orderedMonkeys = Monkeys.Values.Select(m => (long)m.Inspections).OrderByDescending(m => m).ToList();
+        var orderedMonkeys = this.Monkeys.Values.Select(m => (long)m.Inspections).OrderByDescending(m => m).ToList();
         return orderedMonkeys[0] * orderedMonkeys[1];
     }
 
     public void PerformARound(bool relief)
     {
-        foreach (var monkey in Monkeys.Select(monkeyPair => monkeyPair.Value))
+        foreach (var monkey in this.Monkeys.Select(monkeyPair => monkeyPair.Value))
         {
             while (monkey.Items.Count > 0)
             {
@@ -63,12 +65,12 @@ public class MonkeyOrchestrator
                     {
                         throw new OverflowException();
                     }
-                    newWorryLevel %= ModuloShift;
+                    newWorryLevel %= this.ModuloShift;
                 }
 
                 var monkeyToGiveItem = monkey.DetermineWhichMonkeyToThrowTo((int)newWorryLevel);
                 monkey.Items.Remove(item);
-                Monkeys[monkeyToGiveItem].Items.Insert(0, (int)newWorryLevel);
+                this.Monkeys[monkeyToGiveItem].Items.Insert(0, (int)newWorryLevel);
             }
         }
     }
@@ -77,7 +79,7 @@ public class MonkeyOrchestrator
     {
         var inputs = input.Split(Environment.NewLine).ToArray();
         var startingItems = RegexHelper.GetNumbers(inputs[1]).ToList();
-        Monkeys.Add(RegexHelper.GetNumber(inputs[0]), new Monkey(inputs[2], string.Join("", inputs[3..]), startingItems));
+        this.Monkeys.Add(RegexHelper.GetNumber(inputs[0]), new Monkey(inputs[2], string.Join("", inputs[3..]), startingItems));
     }
 }
 
@@ -89,10 +91,10 @@ public class Monkey
 
     public Monkey(string operationString, string testString, List<int> items)
     {
-        Items = items;
-        SetTestParameters(testString);
-        SetOperation(operationString);
-        Inspections = 0;
+        this.Items = items;
+        this.SetTestParameters(testString);
+        this.SetOperation(operationString);
+        this.Inspections = 0;
     }
 
     private Func<int, long> Operation { get; set; }
@@ -109,16 +111,16 @@ public class Monkey
 
     public long CalculateWorryLevel(int number)
     {
-        return Operation(number);
+        return this.Operation(number);
     }
 
     private void SetOperation(string operationString)
     {
-        Operation = oldValue =>
+        this.Operation = oldValue =>
         {
             var operationParts = operationString.Split(" = ")[1].Split(" ");
-            var operationValue1 = GetNumberOrOld(operationParts[0], oldValue);
-            var operationValue2 = GetNumberOrOld(operationParts[2], oldValue);
+            var operationValue1 = this.GetNumberOrOld(operationParts[0], oldValue);
+            var operationValue2 = this.GetNumberOrOld(operationParts[2], oldValue);
             return operationParts[1] switch
             {
                 "+" => operationValue1 + operationValue2,

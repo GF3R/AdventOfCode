@@ -3,6 +3,8 @@ using NUnit.Framework;
 
 namespace AdventOfCode.Test;
 
+using Twenty22.Days;
+
 public class Day10Tests
 {
     private const string TestInput = @"addx 15

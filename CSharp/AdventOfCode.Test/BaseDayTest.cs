@@ -3,6 +3,8 @@ using NUnit.Framework;
 
 namespace AdventOfCode.Test;
 
+using Core;
+
 public class BaseDayTest<T> where T : ISolver
 {
     internal void Part1(string input, object output)

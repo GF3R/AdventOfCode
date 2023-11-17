@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Twenty22.Days;
 
 public class Day2Solver
 {

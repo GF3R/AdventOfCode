@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Twenty22.Days;
 
 public class Day10Solver
 {
@@ -14,7 +14,7 @@ public class Day10Solver
         var line = "";
         do
         {
-            line += GetChar(x, (cycle-1) % 40);
+            line += this.GetChar(x, (cycle-1) % 40);
 
             if (cycle  % 40 == 0)
             {

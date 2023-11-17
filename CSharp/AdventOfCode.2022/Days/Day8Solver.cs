@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Twenty22.Days;
 
 public class Day8Solver
 {
     public int Solve(string input)
     {
-        var matrix = InputToMatrix(input);
+        var matrix = this.InputToMatrix(input);
         var visibleTrees = 0;
         for (var row = 0; row < matrix.Length; row++)
         {
@@ -13,7 +13,7 @@ public class Day8Solver
             {
                 var currentTree = matrix[row][column];
 
-                if (currentTree > maxInColumn || IsTreeVisibleFromRightTopOrBottom(matrix, currentTree, row, column)) visibleTrees++;
+                if (currentTree > maxInColumn || this.IsTreeVisibleFromRightTopOrBottom(matrix, currentTree, row, column)) visibleTrees++;
 
                 maxInColumn = Math.Max(maxInColumn, matrix[row][column]);
             }
@@ -26,13 +26,13 @@ public class Day8Solver
 
     public int SolvePart2(string input)
     {
-        var matrix = InputToMatrix(input);
+        var matrix = this.InputToMatrix(input);
         var maxScore = 0;
         for (var row = 0; row < matrix.Length; row++)
         for (var column = 0; column < matrix[row].Length; column++)
         {
             var currentTree = matrix[row][column];
-            var newScore = GetScenicScore(matrix, currentTree, row, column);
+            var newScore = this.GetScenicScore(matrix, currentTree, row, column);
             maxScore = Math.Max(newScore, maxScore);
         }
 
@@ -52,7 +52,7 @@ public class Day8Solver
         var treesToTheTop = matrixAsList.GetRange(0, row).Select(r => r[column]).Reverse();
         var treesToTheBottom = matrixAsList.GetRange(row + 1, matrix.Length - row - 1).Select(r => r[column]);
 
-        return GetVisibleTrees(treesToTheRight, tree) * GetVisibleTrees(treesToTheLeft, tree) * GetVisibleTrees(treesToTheTop, tree) * GetVisibleTrees(treesToTheBottom, tree);
+        return this.GetVisibleTrees(treesToTheRight, tree) * this.GetVisibleTrees(treesToTheLeft, tree) * this.GetVisibleTrees(treesToTheTop, tree) * this.GetVisibleTrees(treesToTheBottom, tree);
     }
 
     private int GetVisibleTrees(IEnumerable<int> array, int element)

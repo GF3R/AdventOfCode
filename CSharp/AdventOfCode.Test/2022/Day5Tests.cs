@@ -4,6 +4,8 @@ using NUnit.Framework;
 
 namespace AdventOfCode.Test;
 
+using Twenty22.Days;
+
 public class Day5Tests
 {
     private readonly string testInput = @"

@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Core;
 
 public interface ISolver
 {

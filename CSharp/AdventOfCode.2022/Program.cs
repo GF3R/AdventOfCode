@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Days;
+﻿using AdventOfCode.Twenty22.Days;
 
 // var aoCSolver = new Day1Solver();
 // var aoCSolver = new Day2Solver();

@@ -3,6 +3,8 @@ using NUnit.Framework;
 
 namespace AdventOfCode.Test;
 
+using Twenty22.Days;
+
 public class Day13Tests
 {
     private const string TestInput = @"[1,1,3,1,1]

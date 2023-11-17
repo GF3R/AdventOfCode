@@ -3,6 +3,8 @@ using NUnit.Framework;
 
 namespace AdventOfCode.Test;
 
+using Twenty22.Days;
+
 public class Day12Tests
 {
     private const string TestInput = @"Sabqponm

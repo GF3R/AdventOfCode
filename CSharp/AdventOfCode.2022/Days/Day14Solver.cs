@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Twenty22.Days;
+
+using AdventOfCode.Core;
 
 public class Day14Solver : BaseSolver
 {
@@ -12,18 +14,18 @@ public class Day14Solver : BaseSolver
     public override object SolvePart1(string input)
     {
         _cavePoints.Clear();
-        CreateRocks(input);
-        CreateSand();
-        PrintPoints();
+        this.CreateRocks(input);
+        this.CreateSand();
+        this.PrintPoints();
         return _cavePoints.Values.Count(x => x.Type == Material.Sand);
     }
 
     public override object SolvePart2(string input)
     {
         _cavePoints.Clear();
-        CreateRocks(input, true);
-        CreateSand();
-        PrintPoints();
+        this.CreateRocks(input, true);
+        this.CreateSand();
+        this.PrintPoints();
         return _cavePoints.Values.Count(x => x.Type == Material.Sand);
     }
 
@@ -42,21 +44,21 @@ public class Day14Solver : BaseSolver
         while (currentPoint.Y < 5000)
         {
             // move down
-            var pointBelow = GetCavePoint(currentPoint.X, currentPoint.Y + 1);
+            var pointBelow = this.GetCavePoint(currentPoint.X, currentPoint.Y + 1);
             if (pointBelow.Type == Material.Air)
             {
-                currentPoint = PointToFallingSand(pointBelow);
+                currentPoint = this.PointToFallingSand(pointBelow);
                 continue;
             }
 
 
-            var pointDownLeft = GetCavePoint(currentPoint.X - 1, currentPoint.Y + 1);
+            var pointDownLeft = this.GetCavePoint(currentPoint.X - 1, currentPoint.Y + 1);
             if (triedToMoveLeft != pointDownLeft.Y)
             {
                 // move left
                 if (pointDownLeft.Type == Material.Air)
                 {
-                    currentPoint = PointToFallingSand(pointDownLeft);
+                    currentPoint = this.PointToFallingSand(pointDownLeft);
                 }
                 else
                 {
@@ -66,13 +68,13 @@ public class Day14Solver : BaseSolver
                 continue;
             }
 
-            var pointDownRight = GetCavePoint(currentPoint.X + 1, currentPoint.Y + 1);
+            var pointDownRight = this.GetCavePoint(currentPoint.X + 1, currentPoint.Y + 1);
             if (triedToMoveRight != pointDownRight.Y)
             {
                 // move right
                 if (pointDownRight.Type == Material.Air)
                 {
-                    currentPoint = PointToFallingSand(pointDownRight);
+                    currentPoint = this.PointToFallingSand(pointDownRight);
                 }
                 else
                 {
@@ -103,7 +105,7 @@ public class Day14Solver : BaseSolver
                 triedToMoveRight = 0;
             }
 
-            PrintPoints();
+            this.PrintPoints();
         }
     }
 
@@ -156,7 +158,7 @@ public class Day14Solver : BaseSolver
                     _cavePoints.Add(newCavePoint.GetPoint(), newCavePoint);
                 }
 
-                lastCavePoint = lastCavePoint == null ? newCavePoint : CreateCavepointsFromLastToNext(newCavePoint, lastCavePoint);
+                lastCavePoint = lastCavePoint == null ? newCavePoint : this.CreateCavepointsFromLastToNext(newCavePoint, lastCavePoint);
             }
         }
 
@@ -181,7 +183,7 @@ public class Day14Solver : BaseSolver
         {
             for (var x = _minX - 50; x <= _maxX + 50; x++)
             {
-                var point = GetCavePoint(x, y);
+                var point = this.GetCavePoint(x, y);
 
                 switch (point.Type)
                 {
@@ -265,7 +267,7 @@ class CavePoint
 
     public (int, int) GetPoint()
     {
-        return (X, Y);
+        return (this.X, this.Y);
     }
 }
 

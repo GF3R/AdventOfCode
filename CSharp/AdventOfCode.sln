@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.2022", "AdventOfCode.2022\AdventOfCode.2022.csproj", "{5E3DA16C-CA0C-4BD6-97D5-0D624D10C65D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.2022.Test", "AdventOfCode.2022.Test\AdventOfCode.2022.Test.csproj", "{4DF37F95-007D-4497-AD9E-BEE001963134}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Test", "AdventOfCode.Test\AdventOfCode.Test.csproj", "{4DF37F95-007D-4497-AD9E-BEE001963134}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.2023", "AdventOfCode.2023\AdventOfCode.2023.csproj", "{117D1575-C5D7-446B-A47F-ECDDFBCE134C}"
 EndProject

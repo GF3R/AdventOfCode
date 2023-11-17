@@ -1,9 +1,8 @@
-﻿using System;
-
-namespace AdventOfCode._2023
+﻿namespace AdventOfCode.Twenty23
 {
+    using System;
     using System.IO;
-    using Days;
+    using AdventOfCode.Twenty23.Days;
 
     class Program
     {

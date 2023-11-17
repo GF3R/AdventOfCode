@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
-        <RootNamespace>AdventOfCode._2023</RootNamespace>
+        <RootNamespace>AdventOfCode.Twenty23</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
