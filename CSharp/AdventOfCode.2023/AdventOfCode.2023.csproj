@@ -49,6 +49,14 @@
       <Content Update="Inputs\Input13.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="Inputs\Input1.txt" />
+      <Content Include="Inputs\Input1.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Inputs\Input2.txt" />
+      <Content Include="Inputs\Input2.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 
@@ -59,5 +67,6 @@
     <ItemGroup>
       <ProjectReference Include="..\AdventOfCode.Core\AdventOfCode.Core.csproj" />
     </ItemGroup>
+
 
 </Project>
