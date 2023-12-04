@@ -10,8 +10,9 @@
         {
             // var aoCSolver = new Day1Solver();
             // var aoCSolver = new Day2Solver();
-            var aoCSolver = new Day3Solver();
-            var (result1, result2) = aoCSolver.Solve(File.ReadAllText("./Inputs/Input3.txt"));
+            // var aoCSolver = new Day3Solver();
+            var aoCSolver = new Day4Solver();
+            var (result1, result2) = aoCSolver.Solve(File.ReadAllText("./Inputs/Input4.txt"));
             Console.WriteLine("Result: " + result1);
             Console.WriteLine("Result2: " + result2);
 
