@@ -16,13 +16,13 @@ Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
 Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11";
   
     [TestCase(TestInput, 13)]
-    public void Day1Part1Tests(string input, int output)
+    public void Part1Tests(string input, int output)
     {
         Part1(input, output);
     }
 
     [TestCase(TestInput, 30)]
-    public void Day1Part2Tests(string input, int output)
+    public void Part2Tests(string input, int output)
     {
         Part2(input, output);
     }

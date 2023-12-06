@@ -2,13 +2,18 @@
 
 namespace AdventOfCode.Days;
 
-public class RegexHelper
+public static class RegexHelper
 {
     public static readonly Regex RegexToFindNumber = new(@"\d+");
 
-    public static IEnumerable<int> GetNumbers(string input)
+    public static IEnumerable<int> GetNumbers(this string input)
     {
         return RegexToFindNumber.Matches(input).Select(m => int.Parse(m.Value));
+    }
+    
+    public static IEnumerable<long> GetLongNumbers(this string input)
+    {
+        return RegexToFindNumber.Matches(input).Select(m => long.Parse(m.Value));
     }
 
     public static int GetNumber(string input)

@@ -22,7 +22,7 @@ zoneight234
 7pqrstsixteen";
 
     [TestCase(TestInput, 142)]
-    public void Day1Part1Tests(string input, int output)
+    public void Part1Tests(string input, int output)
     {
         Part1(input, output);
     }
@@ -37,7 +37,7 @@ zoneight234
     [TestCase("lhbvlseven41bdrkzmshkxone", 71)]
     [TestCase("sfxxlhkbhqnvskxd2five", 25)]
     [TestCase("6one1djcdmpdrgq3two", 62)]
-    public void Day1Part2Tests(string input, int output)
+    public void Part2Tests(string input, int output)
     {
         Part2(input, output);
     }

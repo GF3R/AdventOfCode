@@ -15,13 +15,13 @@ Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green";
     
     [TestCase(TestInput, 8)]
-    public void Day1Part1Tests(string input, int output)
+    public void Part1Tests(string input, int output)
     {
         Part1(input, output);
     }
 
     [TestCase(TestInput, 2286)]
-    public void Day1Part2Tests(string input, int output)
+    public void Part2Tests(string input, int output)
     {
         Part2(input, output);
     }

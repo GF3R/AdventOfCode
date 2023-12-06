@@ -49,13 +49,13 @@ public class Day3Tests : BaseDayTest<Day3Solver>
     }
     
     [TestCase(TestInput, 4361)]
-    public void Day1Part1Tests(string input, int output)
+    public void Part1Tests(string input, int output)
     {
         Part1(input, output);
     }
 
     [TestCase(TestInput, 467835)]
-    public void Day1Part2Tests(string input, int output)
+    public void Part2Tests(string input, int output)
     {
         Part2(input, output);
     }
