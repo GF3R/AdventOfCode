@@ -7,25 +7,25 @@
 
     public class Day4Solver : BaseSolver
     {
-        private Dictionary<int, List<Card>> PreCopiedCards = new Dictionary<int, List<Card>>();
+        private Dictionary<int, List<LottoCard>> PreCopiedCards = new Dictionary<int, List<LottoCard>>();
         
         // Result1: 532445
         public override object SolvePart1(string input)
         {
             var lines = input.Split("\n");
-            var cards = lines.Select(l => new Card(l)).ToList();
+            var cards = lines.Select(l => new LottoCard(l)).ToList();
             return cards.Sum(c => c.GetScore());
         }
 
         public override object SolvePart2(string input)
         {
             var lines = input.Split("\n");
-            var cards = lines.Select(l => new Card(l)).ToArray();
+            var cards = lines.Select(l => new LottoCard(l)).ToArray();
             var wins = CopyTilYouCantNoMore(cards, cards);
             return wins + cards.Length;
         }
 
-        private int CopyTilYouCantNoMore(Card[] allCards, Card[] cards)
+        private int CopyTilYouCantNoMore(LottoCard[] allCards, LottoCard[] cards)
         {
             int totalWins = 0;
             for (int cardIndex = 0; cardIndex < cards.Length; cardIndex++)
@@ -38,7 +38,7 @@
                 }
                 totalWins += numberOfWins;
                 
-                var copies = new List<Card>();
+                var copies = new List<LottoCard>();
 
                 if (PreCopiedCards.TryGetValue(currentCard.CardNumber, out var card))
                 {
@@ -71,7 +71,7 @@
         }
     }
 
-    public class Card
+    public class LottoCard
     {
         public int[] WinningNumbers { get; set; }
         
@@ -82,7 +82,7 @@
         public int CardIndex => CardNumber - 1;
 
         // Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-        public Card(string line)
+        public LottoCard(string line)
         {
             var splitted = line.Trim().Split(':');
             var numbers = splitted[1].Split('|');
@@ -91,7 +91,7 @@
             this.CardNumber = int.Parse(splitted[0].Split("Card ").First(s => !string.IsNullOrEmpty(s)));
         }
 
-        protected Card(Card card)
+        protected LottoCard(LottoCard card)
         {
             this.CardNumber = card.CardNumber;
             this.Numbers = card.Numbers.ToArray();
@@ -113,9 +113,9 @@
             return this.Numbers.Count(n => this.WinningNumbers.Contains(n));
         }
         
-        public Card CreateCopy()
+        public LottoCard CreateCopy()
         {
-            return new Card(this);
+            return new LottoCard(this);
         }
    
     }

@@ -31,9 +31,6 @@
       <Content Update="Inputs\Input6.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <Content Update="Inputs\Input7.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <Content Update="Inputs\Input8.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
@@ -72,6 +69,13 @@
       <None Remove="Inputs\Input6.txt" />
       <Content Include="Inputs\Input6.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="Inputs\Input7.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Inputs\Input7.txt" />
+      <Content Include="Inputs\Input7.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
 
