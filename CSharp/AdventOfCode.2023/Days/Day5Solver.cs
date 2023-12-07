@@ -10,6 +10,11 @@
 
     public class Day5Solver : BaseSolver
     {
+        /*
+         *
+         * Result1: 535088217
+         * Result2: 51399228
+         */
         public List<SourceToTargetMap> SeedToSoilMap { get; set; } = new();
         public List<SourceToTargetMap> SoilToFertilizer { get; set; } = new();
         public List<SourceToTargetMap> FertilizerToWater { get; set; } = new();
@@ -62,108 +67,53 @@
             SeedList.Clear();
 
             ParseInput(lines, false);
-
-            var lowestLocation = long.MaxValue;
-            var toLocationMaps = new ToLocationMaps();
-            foreach (var seed in SeedList)
+            
+            HumidityToLocation.Sort((x, y) => x.FromTarget.CompareTo(y.FromTarget));
+            var mappingList = new List<List<SourceToTargetMap>>
             {
-                
-                var maps = SeedToSoilMap.GetMaps(seed);
-                
-                var start = seed.Start;
-                for(long i = start; i < seed.End; i++)
+                HumidityToLocation,
+                TemperatureToHumidity,
+                LightToTemperature,
+                WaterToLight,
+                FertilizerToWater,
+                SoilToFertilizer,
+                SeedToSoilMap,
+            };
+            long? lowestSeedLocation = null;
+
+            for (var i = 0; true; i++)
+            {
+                long lastValue = i;
+
+                foreach (var mappings in mappingList)
                 {
-                    if (toLocationMaps.SeedToLocationMap.TryGetValue(start, out var destination))
+                    foreach (var mapping in mappings)
                     {
-                        lowestLocation = Math.Min(lowestLocation, destination);
-                        continue;
+                        if (mapping.FromTarget <= lastValue && lastValue < mapping.FromTarget + mapping.Range)
+                        {
+                            lastValue += mapping.FromSource - mapping.FromTarget;
+                            break;
+                        }
                     }
-                    
-                    var soil = SeedToSoilMap.GetValue(start);
-                    
-                    if(toLocationMaps.SoilToLocationMap.TryGetValue(soil, out destination))
-                    {
-                        toLocationMaps.SeedToLocationMap.Add(start, destination);
-                        lowestLocation = Math.Min(lowestLocation, destination);
-                        continue;
-                    }
-                    
-                    var fertilizer = SoilToFertilizer.GetValue(soil);
+                }
 
-                    if(toLocationMaps.FertilizerToLocationMap.TryGetValue(fertilizer, out destination))
+                foreach (var seedRange in this.SeedList)
+                {
+                    if (seedRange.Start <= lastValue && lastValue < seedRange.Start + seedRange.Range)
                     {
-                        toLocationMaps.SeedToLocationMap.Add(start, destination);
-                        toLocationMaps.SoilToLocationMap.Add(soil, destination);
-                        lowestLocation = Math.Min(lowestLocation, destination);
-                        continue;
+                        lowestSeedLocation = i;
+                        break;
                     }
-                    
-                    var water = FertilizerToWater.GetValue(fertilizer);
-                    
-                    if(toLocationMaps.WaterToLocationMap.TryGetValue(water, out destination))
-                    {
-                        toLocationMaps.SeedToLocationMap.Add(start, destination);
-                        toLocationMaps.SoilToLocationMap.Add(soil, destination);
-                        toLocationMaps.FertilizerToLocationMap.Add(fertilizer, destination);
-                        lowestLocation = Math.Min(lowestLocation, destination);
-                        continue;
-                    }
-                    
-                    var light = WaterToLight.GetValue(water);
-                    
-                    if(toLocationMaps.LightToLocationMap.TryGetValue(light, out destination))
-                    {
-                        toLocationMaps.SeedToLocationMap.Add(start, destination);
-                        toLocationMaps.SoilToLocationMap.Add(soil, destination);
-                        toLocationMaps.FertilizerToLocationMap.Add(fertilizer, destination);
-                        toLocationMaps.WaterToLocationMap.Add(water, destination);
-                        lowestLocation = Math.Min(lowestLocation, destination);
-                        continue;
-                    }
-                    
-                    var temperature = LightToTemperature.GetValue(light);
-                    
-                    if(toLocationMaps.TemperatureToLocationMap.TryGetValue(temperature, out destination))
-                    {
-                        toLocationMaps.SeedToLocationMap.Add(start, destination);
-                        toLocationMaps.SoilToLocationMap.Add(soil, destination);
-                        toLocationMaps.FertilizerToLocationMap.Add(fertilizer, destination);
-                        toLocationMaps.WaterToLocationMap.Add(water, destination);
-                        toLocationMaps.LightToLocationMap.Add(light, destination);
-                        lowestLocation = Math.Min(lowestLocation, destination);
-                        continue;
-                    }
-                    
-                    var humidity = TemperatureToHumidity.GetValue(temperature);
-                    
-                    if(toLocationMaps.HumidityToLocationMap.TryGetValue(humidity, out destination))
-                    {
-                        toLocationMaps.SeedToLocationMap.Add(start, destination);
-                        toLocationMaps.SoilToLocationMap.Add(soil, destination);
-                        toLocationMaps.FertilizerToLocationMap.Add(fertilizer, destination);
-                        toLocationMaps.WaterToLocationMap.Add(water, destination);
-                        toLocationMaps.LightToLocationMap.Add(light, destination);
-                        toLocationMaps.TemperatureToLocationMap.Add(temperature, destination);
-                        lowestLocation = Math.Min(lowestLocation, destination);
-                        continue;
-                    }
-                    
-                    var location = HumidityToLocation.GetValue(humidity);
-                    toLocationMaps.SeedToLocationMap.Add(start, location);
-                    toLocationMaps.SoilToLocationMap.Add(soil, location);
-                    toLocationMaps.FertilizerToLocationMap.Add(fertilizer, location);
-                    toLocationMaps.WaterToLocationMap.Add(water, location);
-                    toLocationMaps.LightToLocationMap.Add(light, location);
-                    toLocationMaps.TemperatureToLocationMap.Add(temperature, location);
-                    toLocationMaps.HumidityToLocationMap.Add(humidity, location);
-                    lowestLocation = Math.Min(lowestLocation, location);
-                    
-                    start++;
+                }
 
+                if (lowestSeedLocation != null)
+                {
+                    break;
                 }
             }
 
-            return lowestLocation;
+            return lowestSeedLocation;
+
         }
 
         public void ParseInput(string[] lines, bool part1 = true)
@@ -260,7 +210,6 @@
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
             }
         }
-
     }
 
     public enum ParseMode
@@ -290,6 +239,8 @@
     {
         public long Start { get; set; }
         public long End { get; set; }
+        
+        public long Range => End - Start;
 
         public Seed(long start, long length)
         {
@@ -305,6 +256,8 @@
         public long ToSource { get; set; }
 
         public long FromTarget { get; set; }
+        
+        public long Range => ToSource - FromSource;
 
         public SourceToTargetMap(long source, long target, long range)
         {
