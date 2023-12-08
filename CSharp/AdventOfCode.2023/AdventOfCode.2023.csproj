@@ -81,6 +81,10 @@
       <Content Include="Inputs\Input8.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="Inputs\Input9.txt" />
+      <Content Include="Inputs\Input9.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 

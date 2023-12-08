@@ -15,12 +15,13 @@
             // var aoCSolver = new Day5Solver();
             // var aoCSolver = new Day6Solver();
             // var aoCSolver = new Day7Solver();
-            var aoCSolver = new Day8Solver();
-            var (result1, result2) = aoCSolver.Solve(File.ReadAllText("./Inputs/Input8.txt"));
+            // var aoCSolver = new Day8Solver();
+            var aoCSolver = new Day9Solver();
+            var (result1, result2) = aoCSolver.Solve(File.ReadAllText("./Inputs/Input9.txt"));
             Console.WriteLine("Result1: " + result1);
             Console.WriteLine("Result2: " + result2);
 
-            Console.ReadLine();        
+            Console.ReadLine();
         }
     }
 }
