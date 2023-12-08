@@ -14,8 +14,9 @@
             // var aoCSolver = new Day4Solver();
             // var aoCSolver = new Day5Solver();
             // var aoCSolver = new Day6Solver();
-            var aoCSolver = new Day7Solver();
-            var (result1, result2) = aoCSolver.Solve(File.ReadAllText("./Inputs/Input7.txt"));
+            // var aoCSolver = new Day7Solver();
+            var aoCSolver = new Day8Solver();
+            var (result1, result2) = aoCSolver.Solve(File.ReadAllText("./Inputs/Input8.txt"));
             Console.WriteLine("Result1: " + result1);
             Console.WriteLine("Result2: " + result2);
 
