@@ -38,14 +38,7 @@
             var steps = 0L;
             while (!checkIfFinal(element))
             {
-                if (instructions[(int) steps % instructions.Length] == 'L')
-                {
-                    element = element.Left;
-                }
-                else
-                {
-                    element = element.Right;
-                }
+                element = instructions[(int) steps % instructions.Length] == 'L' ? element.Left : element.Right;
                 steps++;
             }
 
@@ -86,7 +79,6 @@
 
         public NetworkElement(string input)
         {
-            // regex to match upper case letters or numbers
             var regex = new Regex(@"[A-Z0-9]{3}");
             var matches = regex.Matches(input);
             Name = matches[0].Value;
