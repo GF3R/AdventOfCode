@@ -39,10 +39,6 @@
                 var nextNumber = GetPreviousNumber(measurementHistory);
                 Console.WriteLine($"Next Number: {nextNumber}");
                 Console.WriteLine(measurementHistory.ToString());
-                if(nextNumber < 0)
-                {
-                    Console.WriteLine($"Negative number found {nextNumber}");
-                }
                 sum += nextNumber;
             }
             
