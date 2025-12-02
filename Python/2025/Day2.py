@@ -7,7 +7,7 @@ def hasRepeatingPattern(id: str):
         return False
 
     idLength = len(id)
-    for pat_len in range(1, max(idLength + 1 // 2,2)):
+    for pat_len in range(1, idLength // 2 + 1):
         if idLength % pat_len:  # pattern must tile the whole string
             continue
         pat = id[:pat_len]
