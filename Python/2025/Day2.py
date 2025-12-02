@@ -6,25 +6,14 @@ def hasRepeatingPattern(id: str):
     if len(id) <= 1 :
         return False
 
-    patternLength = 1
-    hasPattern = True
-    
-    while patternLength < len(id):
-        pattern = id[:patternLength]
-        indexInId = 0
-        hasPattern = True
-        
-        while indexInId < len(id):
-            if pattern != id[indexInId:(indexInId+patternLength)]:
-                hasPattern = False
-                break
-            indexInId += patternLength
-            
-        if hasPattern:
-            patternLength = len(id)  # to break outer loop
-        
-        patternLength += 1
-    return hasPattern
+    idLength = len(id)
+    for pat_len in range(1, max(idLength + 1 // 2,2)):
+        if idLength % pat_len:  # pattern must tile the whole string
+            continue
+        pat = id[:pat_len]
+        if pat * (idLength // pat_len) == id:
+            return True
+    return False
 
 #part one
 def hasPatternTwice(id: int):
@@ -33,17 +22,16 @@ def hasPatternTwice(id: int):
     
     patternLength = int(len(id)/ 2)
     return id[:patternLength] == id[patternLength:(patternLength+patternLength)]
-      
-invalidId = 0
-# iterate through each range
-for range in ranges:
-    rangeMinAndMax = range.split('-')
-    fromAsNumber = int(rangeMinAndMax[0])
-    toAsNumber = int(rangeMinAndMax[1])
-    while fromAsNumber <= toAsNumber:
-        if not hasRepeatingPattern(str(fromAsNumber)):
-            print("adding number: ", fromAsNumber)
-            invalidId += fromAsNumber
-        fromAsNumber += 1
+
+partOne = 0
+partTwo = 0
+
+for span in ranges:
+    start, end = map(int, span.split("-", 1))
+    partOne += sum([n for n in range(start, end + 1) if hasPatternTwice(str(n))])
+    partTwo += sum([n for n in range(start, end + 1) if hasRepeatingPattern(str(n))])
     
-print(invalidId)
+print("part one:", partOne, "part two:", partTwo)
+print("correct answer Part one:", 15873079081, "correct answer Part two:", 22617871034)
+isWorking = (partOne == 15873079081) and (partTwo == 22617871034)
+print("is working:", isWorking)
