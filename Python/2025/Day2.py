@@ -1,13 +1,7 @@
 f = open("Input2.txt")
 ranges = f.read().split(',')
 
-# function to Check wether its a valid Id
-def isValidIdPartOne(id: str):
-    return id[0] == 0 or not hasPatternTwice(id)
-
-def isValidIdPartTwo(id: str):
-    return not hasRepeatingPattern(id)
-
+# part two
 def hasRepeatingPattern(id: str):    
     if len(id) <= 1 :
         return False
@@ -32,7 +26,8 @@ def hasRepeatingPattern(id: str):
         patternLength += 1
     return hasPattern
 
-def hasPatternTwice(id: str):
+#part one
+def hasPatternTwice(id: int):
     if len(id) % 2:
         return False
     
@@ -43,12 +38,10 @@ invalidId = 0
 # iterate through each range
 for range in ranges:
     rangeMinAndMax = range.split('-')
-    rangeMin = rangeMinAndMax[0]
-    rangeMax = rangeMinAndMax[1]
-    fromAsNumber = int(rangeMin)
-    toAsNumber = int(rangeMax)
+    fromAsNumber = int(rangeMinAndMax[0])
+    toAsNumber = int(rangeMinAndMax[1])
     while fromAsNumber <= toAsNumber:
-        if not isValidIdPartTwo(str(fromAsNumber)):
+        if not hasRepeatingPattern(str(fromAsNumber)):
             print("adding number: ", fromAsNumber)
             invalidId += fromAsNumber
         fromAsNumber += 1
