@@ -54,11 +54,12 @@ def count_paths_with_both(graph, start, end, must_visit=("dac", "fft")):
     return dfs(start, 0)
    
 # part 1 
-print("part1")       
+print("part 1")       
 findPaths(fromTo, "you", "you")
 print(len(paths))
 print(788)
 ## part 2
+print("part 2")
 paths = count_paths_with_both(fromTo, "svr", "out")
 print(paths)
 print(316291887968000)
